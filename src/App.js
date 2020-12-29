@@ -6,6 +6,7 @@ const App = () => {
         <div className="App">
             <Header/>
             <Header/>
+            <Body/>
         </div>
     );
 };
@@ -14,6 +15,14 @@ const Header = () => {
     return (
         <div className="Header">
 
+        </div>
+    );
+};
+
+const Body = () => {
+    return (
+        <div className="Header">
+            <a href="#">HREF</a>
         </div>
     );
 };
