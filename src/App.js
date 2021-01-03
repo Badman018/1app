@@ -7,6 +7,7 @@ const App = () => {
             <Header/>
             <Header/>
             <Body/>
+            <Body/>
         </div>
     );
 };
@@ -14,7 +15,7 @@ const App = () => {
 const Header = () => {
     return (
         <div className="Header">
-
+            <a href='#'>PAGE YOPTA</a>
         </div>
     );
 };
