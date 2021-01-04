@@ -1,5 +1,5 @@
 import './App.css';
-import React, { Component } from 'react';
+import React from 'react';
 
 const App = () => {
     return (
@@ -15,7 +15,7 @@ const App = () => {
 const Header = () => {
     return (
         <div className="Header">
-            <a href='#'>PAGE YOPTA</a>
+            <p color='black'>PAGE YOPTA</p>
         </div>
     );
 };
