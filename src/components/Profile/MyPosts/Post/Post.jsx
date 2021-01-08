@@ -1,14 +1,14 @@
 import React from 'react';
 import s from './Post.module.css';
 
-const Post = () => {
+const Post = (props) => {
     return (
         <div className={s.content}>
             <div className={s.item}>
-                Post 1
+                Post {props.name}
             </div>
             <div className={s.item}>
-                Post 1
+                Post
             </div>
         </div>
     )

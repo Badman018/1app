@@ -1,9 +1,14 @@
 .nav {
     grid-area: nav;
-    background-color: darkgreen;
+    background-color: royalblue;
     color: white;
 }
 
 .item {
+    text-align: center;
     color: white;
+}
+
+.item:hover {
+    color: black;
 }

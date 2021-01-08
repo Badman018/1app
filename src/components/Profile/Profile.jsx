@@ -3,6 +3,8 @@ import s from './Profile.module.css';
 import MyPost from "./MyPosts/MyPost";
 import Post from "./MyPosts/Post/Post";
 
+const name1 = 'Stas';
+
 const Profile = () => {
     return (
         <div className={s.content}>
@@ -13,8 +15,8 @@ const Profile = () => {
             <div>
                 Photo + descripton
             </div>
-            <MyPost/>
-            <Post/>
+            <MyPost name='Matvei'/>
+            <Post name={name1}/>
             <div>
                 My Posts
                 <div>
