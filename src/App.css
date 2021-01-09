@@ -10,10 +10,6 @@
     width: 1200px;
 }
 
-img {
-    margin-left: 20px;
-}
-
 .app-wrapper-content {
     grid-area: content;
     background-color: yellow;

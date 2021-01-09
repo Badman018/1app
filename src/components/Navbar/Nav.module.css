@@ -9,6 +9,10 @@
     color: white;
 }
 
+a {
+    text-decoration: none;
+}
+
 .item:hover {
     color: black;
 }
