@@ -2,17 +2,19 @@
     grid-area: nav;
     background-color: royalblue;
     color: white;
+    text-align: center;
 }
 
-.item {
+.item a {
     text-align: center;
     color: white;
-}
-
-a {
     text-decoration: none;
 }
 
-.item:hover {
+.item a.activeLink {
+    color: green;
+}
+
+.item a:hover {
     color: black;
 }
