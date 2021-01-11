@@ -3,14 +3,10 @@
     background-color: aqua;
 }
 
-img {
-    width: 100%;
-}
-
-.content {
+.descriptionContent {
     padding: 10px;
 }
 
-.myPost {
-
+img {
+    width: 100%;
 }
