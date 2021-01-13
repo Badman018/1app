@@ -5,10 +5,12 @@ const Post = (props) => {
     return (
         <div className={s.content}>
             <div className={s.item}>
-                Post {props.name}
-            </div>
-            <div className={s.item}>
-                Post
+                <div>
+                    {props.text}
+                </div>
+                <div>
+                    likes = {props.likes}
+                </div>
             </div>
         </div>
     )

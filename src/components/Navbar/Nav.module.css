@@ -12,7 +12,7 @@
 }
 
 .item a.activeLink {
-    color: green;
+    font-weight: bold;
 }
 
 .item a:hover {

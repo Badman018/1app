@@ -9,7 +9,7 @@
 }
 
 .dialog a.activeDialog {
-    color: darkgreen;
+    font-weight: bold;
 }
 
 .dialog {
