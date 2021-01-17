@@ -1,3 +1,5 @@
+let rerenderTree = (state) => {}
+
 let state = {
     profilePage: {
         posts: [
@@ -5,7 +7,8 @@ let state = {
             {id: 2, text: 'Hello, honey', likes: 15},
             {id: 3, text: 'Hello, sweaty', likes: 23},
             {id: 4, text: 'Hello, gay', likes: 1200}
-        ]
+        ],
+        newPostText: 'Matvei super'
     },
     dialogsPage: {
         dialogs: [
@@ -23,6 +26,28 @@ let state = {
             {id: 5, message: 'Yo'}
         ]
     }
+}
+
+window.state = state;
+
+export const updatePostText = (newText) => {
+    state.profilePage.newPostText = newText;
+    rerenderTree(state)
+}
+
+export const addPost = () => {
+    let newPost = {
+        id: state.profilePage.posts.length + 1,
+        text: state.profilePage.newPostText,
+        likes: 0
+    }
+    state.profilePage.posts.push(newPost);
+    state.profilePage.newPostText = '';
+    rerenderTree(state);
+}
+
+export const subscribe = (observer) => {
+    rerenderTree = observer;
 }
 
 export default state;
