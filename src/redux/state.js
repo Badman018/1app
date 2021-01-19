@@ -1,5 +1,7 @@
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
-const ADD_POST = 'ADD-POST';
+const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
+const ADD_POST = 'ADD-POST'
+const SEND_MESSAGE = 'SEND_MESSAGE'
+const UPDATE_NEW_MESSAGE_BODY = 'UPDATE_NEW_MESSAGE_BODY'
 
 let store = {
     _state: {
@@ -26,37 +28,23 @@ let store = {
                 {id: 3, message: 'HAU?'},
                 {id: 4, message: 'Hi'},
                 {id: 5, message: 'Yo'}
-            ]
+            ],
+            newMessageBody: ''
         }
     },
     getState() {
         return this._state;
     },
 
-    _rerenderTree() {
+    _subscribeCall() {
         console.log('State changed')
     },
     subscribe(observer) {
-        this._rerenderTree = observer;
-    },
-
-    addPost() {
-        let newPost = {
-            id: this._state.profilePage.posts.length + 1,
-            text: this._state.profilePage.newPostText,
-            likes: 0
-        }
-        this._state.profilePage.posts.push(newPost);
-        this._state.profilePage.newPostText = '';
-        this._rerenderTree(this._state);
-    },
-    updatePostText(newText) {
-        this._state.profilePage.newPostText = newText;
-        this._rerenderTree(this._state)
+        this._subscribeCall = observer; //observer
     },
 
     dispatch(action) {
-        if(action.type === 'ADD-POST') {
+        if(action.type === ADD_POST) {
             let newPost = {
                 id: this._state.profilePage.posts.length + 1,
                 text: this._state.profilePage.newPostText,
@@ -64,10 +52,18 @@ let store = {
             }
             this._state.profilePage.posts.push(newPost);
             this._state.profilePage.newPostText = '';
-            this._rerenderTree(this._state);
-        } else if(action.type === 'UPDATE-NEW-POST-TEXT') {
+            this._subscribeCall(this._state);
+        } else if(action.type === UPDATE_NEW_POST_TEXT) {
             this._state.profilePage.newPostText = action.newText;
-            this._rerenderTree(this._state)
+            this._subscribeCall(this._state)
+        } else if(action.type === SEND_MESSAGE) {
+            let body = this._state.dialogsPage.newMessageBody;
+            this._state.dialogsPage.newMessageBody = ''
+            this._state.dialogsPage.messages.push({id: this._state.profilePage.posts.length + 1, message: body})
+            this._subscribeCall(this._state)
+        }  else if(action.type === UPDATE_NEW_MESSAGE_BODY) {
+            this._state.dialogsPage.newMessageBody = action.body
+            this._subscribeCall(this._state)
         }
     }
 }
@@ -75,10 +71,16 @@ let store = {
 export const addPostActionCreator = () => ({
     type: ADD_POST
 })
-
 export const updateNewPostTextActionCreator = (text) => ({
     type: UPDATE_NEW_POST_TEXT,
     newText: text
+})
+export const updateNewMessageBodyCreator = (body) => ({
+    type: UPDATE_NEW_MESSAGE_BODY,
+    body: body
+})
+export const sendMessageCreator = () => ({
+    type: SEND_MESSAGE
 })
 
 export default store;
