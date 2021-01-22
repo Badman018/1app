@@ -9,7 +9,25 @@ export const sendMessageCreator = () => ({
     type: SEND_MESSAGE
 })
 
-const dialogsReducer = (state, action) => {
+let initialState = {
+    dialogs: [
+        {id: 1, name: 'Matvei'},
+        {id: 2, name: 'Stas'},
+        {id: 3, name: 'Dima'},
+        {id: 4, name: 'Sasha'},
+        {id: 5, name: 'Name'}
+    ],
+    messages: [
+        {id: 1, message: 'Hello'},
+        {id: 2, message: 'Qq'},
+        {id: 3, message: 'HAU?'},
+        {id: 4, message: 'Hi'},
+        {id: 5, message: 'Yo'}
+    ],
+    newMessageBody: ''
+}
+
+const dialogsReducer = (state = initialState, action) => {
 
     switch (action.type) {
         case SEND_MESSAGE:
