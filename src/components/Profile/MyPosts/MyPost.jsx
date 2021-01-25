@@ -20,7 +20,7 @@ const MyPost = (props) => {
             <div className={s.myPost}>
                 <h3>My post</h3>
             </div>
-            <div className={s.submitPost}>
+            <div>
                 <div>
                     <textarea ref={ newPostElement } onChange={onPostChange} value={props.newPostText} />
                 </div>
