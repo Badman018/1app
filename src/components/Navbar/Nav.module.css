@@ -1,0 +1,20 @@
+.nav {
+    grid-area: nav;
+    background-color: royalblue;
+    color: white;
+    text-align: center;
+}
+
+.item a {
+    text-align: center;
+    color: white;
+    text-decoration: none;
+}
+
+.item a.activeLink {
+    font-weight: bold;
+}
+
+.item a:hover {
+    color: black;
+}

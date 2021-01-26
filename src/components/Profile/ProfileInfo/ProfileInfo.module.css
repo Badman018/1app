@@ -1,0 +1,12 @@
+.content {
+    grid-area: content;
+    background-color: aqua;
+}
+
+.descriptionContent {
+    padding: 10px;
+}
+
+img {
+    width: 100%;
+}

@@ -1,30 +1,26 @@
 import './App.css';
-import React, { Component } from 'react';
+import React from 'react';
+import {BrowserRouter, Route} from 'react-router-dom';
+import Header from "./components/Header/Header";
+import Nav from "./components/Navbar/Nav";
+import Profile from "./components/Profile/Profile";
+import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
-const App = () => {
+const App = (props) => {
     return (
-        <div className="App">
-            <Header/>
-            <Header/>
-            <Body/>
-            <Body/>
-        </div>
-    );
-};
-
-const Header = () => {
-    return (
-        <div className="Header">
-            <a href='#'>PAGE YOPTA</a>
-        </div>
-    );
-};
-
-const Body = () => {
-    return (
-        <div className="Header">
-            <a href="#">HREF</a>
-        </div>
+        <BrowserRouter>
+            <div className="app-wrapper">
+                <Header/>
+                <Nav/>
+                <div className='app-wrapper-content'>
+                    <Route path='/profile' render={ () => <Profile /> } />
+                    <Route path='/dialogs' render={ () => <DialogsContainer />} />
+                    {/*<Route path='/music' component={Music} />
+                    <Route path='/news' component={News} />
+                    <Route path='/settings' component={Settings}/>*/}
+                </div>
+            </div>
+        </BrowserRouter>
     );
 };
 

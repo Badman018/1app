@@ -1,0 +1,34 @@
+.dialogs {
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+    background-color: yellow;
+}
+
+.dialogNav {
+    padding: 10px;
+}
+
+.dialog a.activeDialog {
+    font-weight: bold;
+}
+
+.dialog {
+
+}
+
+.messages {
+    padding: 10px;
+}
+
+.personMessage {
+
+}
+
+.dialog a:hover {
+    color: blue;
+}
+
+.dialog a {
+    text-decoration: none;
+    color: black;
+}
