@@ -3,36 +3,41 @@ import s from './Dialogs.module.css'
 import DialogsItem from "./DialogItem/DialogsItem";
 import MessageItem from "./MessageItem/MessageItem";
 
-const Dialogs = (props) => {
-    let dialogsElements = props.dialogsPage.dialogs.map( d => <DialogsItem name={d.name} id={d.id}/>);
-    let messageElements = props.dialogsPage.messages.map( m => <MessageItem message={m.message}/>);
-    let newMessageBody = props.dialogsPage.newMessageBody;
-    let newMessageElement = React.createRef();
-
-    let onSendMessage = () => {
-        props.sendMessage();
+class Dialogs extends React.Component {
+    onSendMessage = () => {
+        this.props.sendMessage();
     }
-    let onUpdateMessageBody = () => {
-        let body = newMessageElement.current.value;
-        props.updateMessageBody(body)
+    onUpdateMessageBody = () => {
+        this.body = this.newMessageElement.current.value;
+        this.props.updateMessageBody(this.body)
     }
 
-    return (
-        <div className={s.dialogs}>
-            <div className={s.dialogNav}>
-                { dialogsElements }
-            </div>
-            <div className={s.messages}>
-                <div>
-                    { messageElements }
+    render() {
+        this.dialogsElements = this.props.dialogsPage.dialogs.map(d => <DialogsItem name={d.name} id={d.id}/>);
+        this.messageElements = this.props.dialogsPage.messages.map(m => <MessageItem message={m.message}/>);
+        this.newMessageBody = this.props.dialogsPage.newMessageBody;
+        this.newMessageElement = React.createRef();
+        return (
+            <div className={s.dialogs}>
+                <div className={s.dialogNav}>
+                    {this.dialogsElements}
                 </div>
-                <div>
-                    <div><textarea ref={newMessageElement} value={newMessageBody} onChange={onUpdateMessageBody} placeholder='Enter tour message' className={s.textArea}/></div>
-                    <div><button onClick={onSendMessage}>Send</button></div>
+                <div className={s.messages}>
+                    <div>
+                        {this.messageElements}
+                    </div>
+                    <div>
+                        <div><textarea ref={this.newMessageElement} value={this.newMessageBody} onChange={this.onUpdateMessageBody}
+                                       placeholder='Enter tour message' className={s.textArea}/></div>
+                        <div>
+                            <button onClick={this.onSendMessage}>Send</button>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    )
+        )
+    }
+
 }
 
 export default Dialogs;

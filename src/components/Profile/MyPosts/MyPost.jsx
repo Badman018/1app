@@ -2,37 +2,36 @@ import React from 'react';
 import s from './MyPost.module.css';
 import Post from "./Post/Post";
 
-const MyPost = (props) => {
-    let postsElements = props.posts.map( p => <Post text={p.text} likes={p.likes}/>)
-    let newPostElement = React.createRef();
-
-    let onAddPost = () => {
-        props.addPost()
+class MyPost extends React.Component {
+    onAddPost = () => {
+        this.props.addPost()
     }
-
-    let onPostChange = () => {
-        let newPost = newPostElement.current.value;
-        props.updatePostText(newPost)
+    onPostChange = () => {
+        let newPost = this.newPostElement.current.value;
+        this.props.updatePostText(newPost)
     }
-
-    return (
-        <div className={s.content}>
-            <div className={s.myPost}>
-                <h3>My post</h3>
-            </div>
-            <div>
-                <div>
-                    <textarea ref={ newPostElement } onChange={onPostChange} value={props.newPostText} />
+    render() {
+        this.postsElements = this.props.posts.map( p => <Post text={p.text} likes={p.likes}/>)
+        this.newPostElement = React.createRef();
+        return (
+            <div className={s.content}>
+                <div className={s.myPost}>
+                    <h3>My post</h3>
                 </div>
                 <div>
-                    <button onClick={ onAddPost }>Add</button>
+                    <div>
+                        <textarea ref={ this.newPostElement } onChange={ this.onPostChange } value={ this.props.newPostText } />
+                    </div>
+                    <div>
+                        <button onClick={ this.onAddPost }>Add</button>
+                    </div>
+                </div>
+                <div>
+                    { this.postsElements }
                 </div>
             </div>
-            <div>
-                { postsElements }
-            </div>
-        </div>
-    )
+        )
+    }
 }
 
 export default MyPost;
