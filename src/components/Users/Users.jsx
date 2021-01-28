@@ -25,7 +25,7 @@ const Users = (props) => {
                 props.users.map(users => <div key={users.id}>
                         <span>
                             <div>
-                                <img src={userPhoto} className={style.photo} alt=''/>
+                                <img src={users.photos.small != null ? users.photos.small : userPhoto} className={style.photo} alt=''/>
                             </div>
                             <div>
                                 {users.follow

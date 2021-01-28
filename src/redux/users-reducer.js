@@ -5,12 +5,12 @@ const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
 const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT'
 const STATUS_IS_FETCHING = 'STATUS_IS_FETCHING'
 
-export const followActionCreator = (userId) => ({type: FOLLOW, userId: userId})
-export const unfollowActionCreator = (userId) => ({type: UNFOLLOW, userId: userId})
-export const setUsersAC = (users) => ({type: SET_USERS, users: users})
-export const setCurrentPageAC = (currentPage) => ({type: SET_CURRENT_PAGE, currentPage: currentPage})
-export const setTotalUsersCountAC = (totalUsersCount) => ({type: SET_TOTAL_USERS_COUNT, totalUsersCount: totalUsersCount})
-export const setStatusIsFetchingAC = (isFetching) => ({type: STATUS_IS_FETCHING, isFetching: isFetching})
+export const follow = (userId) => ({type: FOLLOW, userId: userId})
+export const unfollow = (userId) => ({type: UNFOLLOW, userId: userId})
+export const setUsers = (users) => ({type: SET_USERS, users: users})
+export const setCurrentPage = (currentPage) => ({type: SET_CURRENT_PAGE, currentPage: currentPage})
+export const setTotalUsersCount = (totalUsersCount) => ({type: SET_TOTAL_USERS_COUNT, totalUsersCount: totalUsersCount})
+export const setStatusIsFetching = (isFetching) => ({type: STATUS_IS_FETCHING, isFetching: isFetching})
 
 let initialState = {
     users: [],
