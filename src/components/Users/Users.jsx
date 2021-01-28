@@ -1,6 +1,7 @@
 import React from "react";
 import style from './Users.module.css'
 import userPhoto from '../../assets/images/User.png'
+import {NavLink} from "react-router-dom";
 
 const Users = (props) => {
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
@@ -13,11 +14,7 @@ const Users = (props) => {
             <div>
                 {
                     pages.map(p => {
-                        return (
-                            <span className={props.currentPage === p && style.selectedPage} onClick={() => {
-                                props.onPageChanged(p)
-                            }}>{p}</span>
-                        )
+                        return <span className={props.currentPage === p && style.selectedPage} onClick={() => {props.onPageChanged(p)}}>{p}</span>
                     })
                 }
             </div>
@@ -25,17 +22,13 @@ const Users = (props) => {
                 props.users.map(users => <div key={users.id}>
                         <span>
                             <div>
-                                <img src={users.photos.small != null ? users.photos.small : userPhoto} className={style.photo} alt=''/>
+                                <NavLink to={'/profile/' + users.id}>
+                                    <img src={users.photos.small != null ? users.photos.small : userPhoto}
+                                         className={style.photo} alt=''/>
+                                </NavLink>
                             </div>
                             <div>
-                                {users.follow
-                                    ? <button onClick={() => {
-                                        props.unfollow(users.id)
-                                    }}>Unfollow</button>
-                                    : <button onClick={() => {
-                                        props.follow(users.id)
-                                    }}>Follow</button>
-                                }
+                                { users.follow ? <button onClick={() => {props.unfollow(users.id)}}>Unfollow</button> : <button onClick={() => {props.follow(users.id)}}>Follow</button> }
                             </div>
                         </span>
                         <span>

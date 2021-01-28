@@ -8,7 +8,6 @@ const ProfileInfo = (props) => {
             <Preloader/>
         )
     }
-    debugger
     return (
         <div className={s.content}>
             <div>
