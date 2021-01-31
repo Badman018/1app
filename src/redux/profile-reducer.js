@@ -8,10 +8,10 @@ export const setUsersProfile = (profile) => ({type: SET_USERS_PROFILE, profile})
 
 let initialState = {
     posts: [
-        {id: 1, text: 'Hello, dear', likes: 12},
-        {id: 2, text: 'Hello, honey', likes: 15},
-        {id: 3, text: 'Hello, sweaty', likes: 23},
-        {id: 4, text: 'Hello, gay', likes: 1200}
+        {id: 1, text: 'Hello', likes: 12},
+        {id: 2, text: 'Helloo', likes: 15},
+        {id: 3, text: 'Hellooo', likes: 23},
+        {id: 4, text: 'Helloooo', likes: 1200}
     ],
     newPostText: 'Matvei super',
     profile: null

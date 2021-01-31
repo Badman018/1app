@@ -4,20 +4,15 @@ const SET_USERS = 'SET_USERS'
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
 const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT'
 const STATUS_IS_FETCHING = 'STATUS_IS_FETCHING'
-
-export const follow = (userId) => ({type: FOLLOW, userId: userId})
-export const unfollow = (userId) => ({type: UNFOLLOW, userId: userId})
-export const setUsers = (users) => ({type: SET_USERS, users: users})
-export const setCurrentPage = (currentPage) => ({type: SET_CURRENT_PAGE, currentPage: currentPage})
-export const setTotalUsersCount = (totalUsersCount) => ({type: SET_TOTAL_USERS_COUNT, totalUsersCount: totalUsersCount})
-export const setStatusIsFetching = (isFetching) => ({type: STATUS_IS_FETCHING, isFetching: isFetching})
+const FOLLOWING_IN_PROGRESS = 'FOLLOWING_IN_PROGRESS'
 
 let initialState = {
     users: [],
     pageSize: 4,
     totalUsersCount: 0,
     currentPage: 1,
-    isFetching: true
+    isFetching: true,
+    followingInProgress: []
 }
 
 const usersReducer = (state = initialState, action) => {
@@ -25,12 +20,20 @@ const usersReducer = (state = initialState, action) => {
         case FOLLOW: {
             return {
                 ...state,
-                users: state.users.map( users => {
-                    if(users.id === action.userId) {
-                        return {...users, follow: true}
+                users: state.users.map(users => {
+                    if (users.id === action.userId) {
+                        return {...users, followed: true}
                     }
                     return users
                 })
+            }
+        }
+        case FOLLOWING_IN_PROGRESS: {
+            return {
+                ...state,
+                followingInProgress: action.isFetching
+                    ? [...state.followingInProgress, action.userId]
+                    : state.followingInProgress.filter(id => id != action.userId)
             }
         }
         case STATUS_IS_FETCHING: {
@@ -56,16 +59,25 @@ const usersReducer = (state = initialState, action) => {
         case UNFOLLOW: {
             return {
                 ...state,
-                users: state.users.map( users => {
-                    if(users.id === action.userId) {
-                        return {...users, follow: false}
+                users: state.users.map(users => {
+                    if (users.id === action.userId) {
+                        return {...users, followed: false}
                     }
                     return users
                 })
             }
         }
-        default: return state
+        default:
+            return state
     }
 }
+
+export const follow = (userId) => ({type: FOLLOW, userId: userId})
+export const unfollow = (userId) => ({type: UNFOLLOW, userId: userId})
+export const setUsers = (users) => ({type: SET_USERS, users: users})
+export const setCurrentPage = (currentPage) => ({type: SET_CURRENT_PAGE, currentPage: currentPage})
+export const setTotalUsersCount = (totalUsersCount) => ({type: SET_TOTAL_USERS_COUNT, totalUsersCount: totalUsersCount})
+export const setStatusIsFetching = (isFetching) => ({type: STATUS_IS_FETCHING, isFetching: isFetching})
+export const setFollowingInProgress = (isFetching, userId) => ({type: FOLLOWING_IN_PROGRESS, isFetching, userId})
 
 export default usersReducer;

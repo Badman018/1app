@@ -1,44 +1,54 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {follow, setCurrentPage, setStatusIsFetching, setTotalUsersCount, setUsers, unfollow} from "../../redux/users-reducer";
+import {
+    follow,
+    setCurrentPage, setFollowingInProgress,
+    setStatusIsFetching,
+    setTotalUsersCount,
+    setUsers,
+    unfollow
+} from "../../redux/users-reducer";
 import Users from "./Users";
-import axios from "axios";
 import style from './Users.module.css'
-import preloader from './../../assets/images/loader.svg'
 import Preloader from "../Preloader/Preloader";
+import {usersAPI} from "../../api/api";
 
 class UsersContainer extends React.Component {
     componentDidMount() {
         this.props.setStatusIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
-            .then(response => {
+        usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
+            .then(data => {
                 this.props.setStatusIsFetching(false)
-                this.props.setUsers(response.data.items)
+                this.props.setUsers(data.items)
                 this.props.setTotalUsersCount(10)
             })
     }
+
     onPageChanged = (pageNumber) => {
         this.props.setStatusIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
-            .then(response => {
+        usersAPI.getUsers(pageNumber, this.props.pageSize)
+            .then(data => {
                 this.props.setStatusIsFetching(false)
-                this.props.setUsers(response.data.items)
+                this.props.setUsers(data.items)
             })
         this.props.setCurrentPage(pageNumber)
     }
+
     render() {
         return <>
-            { this.props.isFetching ?
+            {this.props.isFetching ?
                 <div className={style.preloaderDiv}>
-                    <Preloader />
+                    <Preloader/>
                 </div> : null}
             <Users totalUsersCount={this.props.totalUsersCount}
-                          pageSize={this.props.pageSize}
-                          currentPage={this.props.currentPage}
-                          onPageChanged={this.onPageChanged}
-                          unfollow={this.props.unfollow}
-                          follow={this.props.follow}
-                          users={this.props.users}
+                   pageSize={this.props.pageSize}
+                   currentPage={this.props.currentPage}
+                   onPageChanged={this.onPageChanged}
+                   unfollow={this.props.unfollow}
+                   follow={this.props.follow}
+                   followingInProgress={this.props.followingInProgress}
+                   users={this.props.users}
+                   setFollowingInProgress={this.props.setFollowingInProgress}
             />
         </>
     }
@@ -50,10 +60,19 @@ let mapStateToProps = (state) => {
         pageSize: state.usersPage.pageSize,
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching
+        isFetching: state.usersPage.isFetching,
+        followingInProgress: state.usersPage.followingInProgress
     }
 }
 
-const UsersContainerConnect = connect(mapStateToProps, { follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, setStatusIsFetching})(UsersContainer)
+const UsersContainerConnect = connect(mapStateToProps, {
+    follow,
+    unfollow,
+    setUsers,
+    setCurrentPage,
+    setTotalUsersCount,
+    setStatusIsFetching,
+    setFollowingInProgress
+})(UsersContainer)
 
 export default UsersContainerConnect;
