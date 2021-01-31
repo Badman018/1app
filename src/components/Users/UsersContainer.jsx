@@ -1,36 +1,21 @@
 import React from 'react';
 import {connect} from "react-redux";
 import {
-    follow,
+    follow, followCreator, getUsers,
     setCurrentPage, setFollowingInProgress,
-    setStatusIsFetching,
-    setTotalUsersCount,
-    setUsers,
-    unfollow
+    unfollow, unfollowCreator
 } from "../../redux/users-reducer";
 import Users from "./Users";
 import style from './Users.module.css'
 import Preloader from "../Preloader/Preloader";
-import {usersAPI} from "../../api/api";
 
 class UsersContainer extends React.Component {
     componentDidMount() {
-        this.props.setStatusIsFetching(true)
-        usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
-            .then(data => {
-                this.props.setStatusIsFetching(false)
-                this.props.setUsers(data.items)
-                this.props.setTotalUsersCount(10)
-            })
+        this.props.getUsers(this.props.currentPage, this.props.pageSize)
     }
 
     onPageChanged = (pageNumber) => {
-        this.props.setStatusIsFetching(true)
-        usersAPI.getUsers(pageNumber, this.props.pageSize)
-            .then(data => {
-                this.props.setStatusIsFetching(false)
-                this.props.setUsers(data.items)
-            })
+        this.props.getUsers(pageNumber, this.props.pageSize)
         this.props.setCurrentPage(pageNumber)
     }
 
@@ -49,6 +34,8 @@ class UsersContainer extends React.Component {
                    followingInProgress={this.props.followingInProgress}
                    users={this.props.users}
                    setFollowingInProgress={this.props.setFollowingInProgress}
+                   unfollowCreator={this.props.unfollowCreator}
+                   followCreator={this.props.followCreator}
             />
         </>
     }
@@ -68,11 +55,11 @@ let mapStateToProps = (state) => {
 const UsersContainerConnect = connect(mapStateToProps, {
     follow,
     unfollow,
-    setUsers,
     setCurrentPage,
-    setTotalUsersCount,
-    setStatusIsFetching,
-    setFollowingInProgress
+    setFollowingInProgress,
+    getUsers,
+    unfollowCreator,
+    followCreator
 })(UsersContainer)
 
 export default UsersContainerConnect;
