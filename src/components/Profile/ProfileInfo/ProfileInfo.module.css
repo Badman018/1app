@@ -14,3 +14,7 @@ img {
 .descriptionContent img {
     width: 10%;
 }
+
+input {
+    outline: none;
+}

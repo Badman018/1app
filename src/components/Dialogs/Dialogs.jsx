@@ -16,7 +16,6 @@ class Dialogs extends React.Component {
         this.dialogsElements = this.props.dialogsPage.dialogs.map(d => <DialogsItem name={d.name} id={d.id}/>);
         this.messageElements = this.props.dialogsPage.messages.map(m => <MessageItem message={m.message}/>);
         this.newMessageBody = this.props.dialogsPage.newMessageBody;
-
         return (
             <div className={s.dialogs}>
                 <div className={s.dialogNav}>

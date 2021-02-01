@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import {getUserProfileInfoApi} from "../../redux/profile-reducer";
 import {withRouter} from "react-router";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 class ProfileContainer extends React.Component {
     componentDidMount() {
@@ -25,7 +26,8 @@ let mapStateToProps = (state) => {
     }
 }
 
-let AuthRedirectComponent = withAuthRedirect(ProfileContainer)
-let WithUrlDataContainerComponent = withRouter(AuthRedirectComponent)
-
-export default connect(mapStateToProps, {getUserProfileInfoApi})(WithUrlDataContainerComponent)
+export default compose(
+    connect(mapStateToProps, {getUserProfileInfoApi}),
+    withRouter,
+    withAuthRedirect
+)(ProfileContainer)
