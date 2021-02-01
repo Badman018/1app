@@ -2,7 +2,6 @@ import React from 'react';
 import s from './Dialogs.module.css'
 import DialogsItem from "./DialogItem/DialogsItem";
 import MessageItem from "./MessageItem/MessageItem";
-import {Redirect} from "react-router";
 
 class Dialogs extends React.Component {
     onSendMessage = () => {
@@ -17,8 +16,6 @@ class Dialogs extends React.Component {
         this.dialogsElements = this.props.dialogsPage.dialogs.map(d => <DialogsItem name={d.name} id={d.id}/>);
         this.messageElements = this.props.dialogsPage.messages.map(m => <MessageItem message={m.message}/>);
         this.newMessageBody = this.props.dialogsPage.newMessageBody;
-
-        if(!this.props.isAuth) return <Redirect to={'/login'}/>
 
         return (
             <div className={s.dialogs}>
