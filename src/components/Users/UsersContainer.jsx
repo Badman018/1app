@@ -7,7 +7,7 @@ import {
 } from "../../redux/users-reducer";
 import Users from "./Users";
 import style from './Users.module.css'
-import Preloader from "../Preloader/Preloader";
+import Preloader from "../common/Preloader/Preloader";
 import {compose} from "redux";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
