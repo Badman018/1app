@@ -12,6 +12,10 @@
     font-weight: bold;
 }
 
+.textArea {
+    outline: none;
+}
+
 .dialog {
 
 }

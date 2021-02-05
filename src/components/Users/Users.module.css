@@ -1,0 +1,17 @@
+.photo {
+    width: 100px;
+}
+
+.selectedPage {
+    font-weight: bold;
+}
+
+.preloaderDiv {
+    display: flex;
+    justify-content: center;
+}
+
+.preloaderImg {
+    height: 200px;
+    width: 200px;
+}

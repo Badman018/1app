@@ -10,3 +10,7 @@
 .myPost {
 
 }
+
+input, textarea {
+    outline: none;
+}
