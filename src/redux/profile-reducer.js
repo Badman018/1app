@@ -9,7 +9,7 @@ let initialState = {
         {id: 1, text: 'Hello', likes: 12},
         {id: 2, text: 'Helloo', likes: 15},
         {id: 3, text: 'Hellooo', likes: 23},
-        {id: 4, text: 'Helloooo', likes: 1200}
+        {id: 4, text: 'bTDjgpSY5_j_ABq', likes: 1200}
     ],
     profile: null,
     status: ''

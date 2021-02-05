@@ -8,7 +8,7 @@ import {Textarea} from "../common/FormsContols/FormsControls";
 
 class Dialogs extends React.Component {
     onSendMessage = (values) => {
-        this.props.sendMessage(values.newMessageBody);
+        this.props.sendMessageCreator(values.newMessageBody);
     }
 
     render() {
