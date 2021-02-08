@@ -2,3 +2,9 @@
 .formControl.error textarea {
     border: 2px solid red;
 }
+
+.formSummaryError {
+    border: 1px solid red;
+    color: indianred;
+    padding: 5px;
+}
