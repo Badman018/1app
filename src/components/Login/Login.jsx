@@ -38,7 +38,7 @@ const Login = (props) => {
     if(props.isAuth) return <Redirect to={'/profile'}/>
     return (
         <div>
-            <h1>Login</h1>
+            <h1>Login(bTDjgpSY5_j_ABq)</h1>
             <LoginReduxForm onSubmit={onSubmit}/>
         </div>
     )

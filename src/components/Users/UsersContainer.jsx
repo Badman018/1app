@@ -21,11 +21,11 @@ import {
 
 class UsersContainer extends React.Component {
     componentDidMount() {
-        this.props.getUsers(this.props.currentPage, this.props.pageSize)
+        this.props.getUsersCreator(this.props.currentPage, this.props.pageSize)
     }
 
     onPageChanged = (pageNumber) => {
-        this.props.getUsers(pageNumber, this.props.pageSize)
+        this.props.getUsersCreator(pageNumber, this.props.pageSize)
         this.props.setCurrentPage(pageNumber)
     }
 
@@ -64,6 +64,6 @@ let mapStateToProps = (state) => {
 
 export default compose(
     connect(mapStateToProps, {follow, unfollow,
-        setCurrentPage, setFollowingInProgress, getUsers: getUsersCreator, unfollowCreator, followCreator}),
+        setCurrentPage, setFollowingInProgress, getUsersCreator, unfollowCreator, followCreator}),
     withAuthRedirect)
 (UsersContainer);
