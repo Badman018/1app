@@ -42,7 +42,6 @@ export const setUsersDataApi = () => (dispatch) => {
             }
         })
 }
-
 export const login = (email, password, rememberMe) => (dispatch) => {
     authAPI.login(email, password, rememberMe)
         .then(response => {
