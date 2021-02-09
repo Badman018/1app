@@ -35,18 +35,7 @@ class UsersContainer extends React.Component {
                 <div className={style.preloaderDiv}>
                     <Preloader/>
                 </div> : null}
-            <Users totalUsersCount={this.props.totalUsersCount}
-                   pageSize={this.props.pageSize}
-                   currentPage={this.props.currentPage}
-                   onPageChanged={this.onPageChanged}
-                   unfollow={this.props.unfollow}
-                   follow={this.props.follow}
-                   followingInProgress={this.props.followingInProgress}
-                   users={this.props.users}
-                   setFollowingInProgress={this.props.setFollowingInProgress}
-                   unfollowCreator={this.props.unfollowCreator}
-                   followCreator={this.props.followCreator}
-            />
+            <Users {...this.props} onPageChanged={this.onPageChanged}/>
         </>
     }
 }
@@ -64,6 +53,7 @@ let mapStateToProps = (state) => {
 
 export default compose(
     connect(mapStateToProps, {follow, unfollow,
-        setCurrentPage, setFollowingInProgress, getUsersCreator, unfollowCreator, followCreator}),
+        setCurrentPage, setFollowingInProgress,
+        getUsersCreator, unfollowCreator, followCreator}),
     withAuthRedirect)
 (UsersContainer);
