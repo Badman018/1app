@@ -1,0 +1,77 @@
+Index: src/components/Login/Login.jsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import React from \"react\";\r\nimport {Field, reduxForm} from \"redux-form\";\r\nimport {Input} from \"../common/FormsContols/FormsControls\";\r\nimport {maxLength15, required} from \"../../utils/validators/validator\";\r\nimport {connect} from \"react-redux\";\r\nimport {login, logout} from \"../../redux/auth-reducer\";\r\nimport {Redirect} from \"react-router\";\r\nimport style from './../common/FormsContols/FormsControls.module.css'\r\n\r\nconst LoginForm = (props) => {\r\n    return (\r\n        <form onSubmit={props.handleSubmit}>\r\n            <div>\r\n                <Field validate={[required, maxLength15]} component={Input} name={'login'} placeholder={\"Email\"}/>\r\n            </div>\r\n            <div>\r\n                <Field validate={[required, maxLength15]} component={Input} name={'password'} placeholder={'Password'} type={'password'}/>\r\n            </div>\r\n            <div>\r\n                <Field component={Input} type={'checkbox'} name={'rememberMe'}/>remember me\r\n            </div>\r\n            { props.error && <div className={style.formSummaryError}>\r\n                {props.error}\r\n            </div> }\r\n            <div>\r\n                <button>Login</button>\r\n            </div>\r\n        </form>\r\n    )\r\n}\r\n\r\nconst LoginReduxForm = reduxForm({form: 'login'})(LoginForm)\r\n\r\nconst Login = (props) => {\r\n    const onSubmit = (formData) => {\r\n        props.login(formData.login, formData.password, formData.rememberMe)\r\n    }\r\n    if(props.isAuth) return <Redirect to={'/profile'}/>\r\n    return (\r\n        <div>\r\n            <h1>Login</h1>\r\n            <LoginReduxForm onSubmit={onSubmit}/>\r\n        </div>\r\n    )\r\n}\r\n\r\nconst mapStateToProps = (state) => {\r\n    return {\r\n        isAuth: state.auth.isAuth\r\n    }\r\n}\r\n\r\nexport default connect(mapStateToProps, {login, logout})(Login)
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/components/Login/Login.jsx b/src/components/Login/Login.jsx
+--- a/src/components/Login/Login.jsx	(revision 3616e168f2790b0e712e03032f1f553f33789fdd)
++++ b/src/components/Login/Login.jsx	(date 1612813427615)
+@@ -38,7 +38,7 @@
+     if(props.isAuth) return <Redirect to={'/profile'}/>
+     return (
+         <div>
+-            <h1>Login</h1>
++            <h1>Login(bTDjgpSY5_j_ABq)</h1>
+             <LoginReduxForm onSubmit={onSubmit}/>
+         </div>
+     )
+Index: src/components/Users/UsersContainer.jsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import React from 'react';\r\nimport {connect} from \"react-redux\";\r\nimport {\r\n    follow, followCreator, getUsersCreator,\r\n    setCurrentPage, setFollowingInProgress,\r\n    unfollow, unfollowCreator\r\n} from \"../../redux/users-reducer\";\r\nimport Users from \"./Users\";\r\nimport style from './Users.module.css'\r\nimport Preloader from \"../common/Preloader/Preloader\";\r\nimport {compose} from \"redux\";\r\nimport {withAuthRedirect} from \"../../hoc/withAuthRedirect\";\r\nimport {\r\n    getFollowingInProgress,\r\n    getIsFetching,\r\n    getPage,\r\n    getPageSize,\r\n    getTotalUsersCount,\r\n    getUsers\r\n} from \"../../redux/users-selectors\";\r\n\r\nclass UsersContainer extends React.Component {\r\n    componentDidMount() {\r\n        this.props.getUsers(this.props.currentPage, this.props.pageSize)\r\n    }\r\n\r\n    onPageChanged = (pageNumber) => {\r\n        this.props.getUsers(pageNumber, this.props.pageSize)\r\n        this.props.setCurrentPage(pageNumber)\r\n    }\r\n\r\n    render() {\r\n        return <>\r\n            {this.props.isFetching ?\r\n                <div className={style.preloaderDiv}>\r\n                    <Preloader/>\r\n                </div> : null}\r\n            <Users totalUsersCount={this.props.totalUsersCount}\r\n                   pageSize={this.props.pageSize}\r\n                   currentPage={this.props.currentPage}\r\n                   onPageChanged={this.onPageChanged}\r\n                   unfollow={this.props.unfollow}\r\n                   follow={this.props.follow}\r\n                   followingInProgress={this.props.followingInProgress}\r\n                   users={this.props.users}\r\n                   setFollowingInProgress={this.props.setFollowingInProgress}\r\n                   unfollowCreator={this.props.unfollowCreator}\r\n                   followCreator={this.props.followCreator}\r\n            />\r\n        </>\r\n    }\r\n}\r\n\r\nlet mapStateToProps = (state) => {\r\n    return {\r\n        users: getUsers(state),\r\n        pageSize: getPageSize(state),\r\n        totalUsersCount: getTotalUsersCount(state),\r\n        currentPage: getPage(state),\r\n        isFetching: getIsFetching(state),\r\n        followingInProgress: getFollowingInProgress(state)\r\n    }\r\n}\r\n\r\nexport default compose(\r\n    connect(mapStateToProps, {follow, unfollow,\r\n        setCurrentPage, setFollowingInProgress, getUsersCreator, unfollowCreator, followCreator}),\r\n    withAuthRedirect)\r\n(UsersContainer);
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/components/Users/UsersContainer.jsx b/src/components/Users/UsersContainer.jsx
+--- a/src/components/Users/UsersContainer.jsx	(revision 3616e168f2790b0e712e03032f1f553f33789fdd)
++++ b/src/components/Users/UsersContainer.jsx	(date 1612813403787)
+@@ -21,11 +21,11 @@
+ 
+ class UsersContainer extends React.Component {
+     componentDidMount() {
+-        this.props.getUsers(this.props.currentPage, this.props.pageSize)
++        this.props.getUsersCreator(this.props.currentPage, this.props.pageSize)
+     }
+ 
+     onPageChanged = (pageNumber) => {
+-        this.props.getUsers(pageNumber, this.props.pageSize)
++        this.props.getUsersCreator(pageNumber, this.props.pageSize)
+         this.props.setCurrentPage(pageNumber)
+     }
+ 
+Index: src/redux/users-selectors.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>export const getUsers = (state) => {\r\n    return state.usersPage.users\r\n}\r\nexport const getPageSize = (state) => {\r\n    return state.usersPage.users\r\n}\r\nexport const getTotalUsersCount = (state) => {\r\n    return state.usersPage.users\r\n}\r\nexport const getPage = (state) => {\r\n    return state.usersPage.users\r\n}\r\nexport const getIsFetching = (state) => {\r\n    return state.usersPage.users\r\n}\r\nexport const getFollowingInProgress = (state) => {\r\n    return state.usersPage.users\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/redux/users-selectors.js b/src/redux/users-selectors.js
+--- a/src/redux/users-selectors.js	(revision 3616e168f2790b0e712e03032f1f553f33789fdd)
++++ b/src/redux/users-selectors.js	(date 1612813559909)
+@@ -2,17 +2,17 @@
+     return state.usersPage.users
+ }
+ export const getPageSize = (state) => {
+-    return state.usersPage.users
++    return state.usersPage.pageSize
+ }
+ export const getTotalUsersCount = (state) => {
+-    return state.usersPage.users
++    return state.usersPage.totalUsersCount
+ }
+ export const getPage = (state) => {
+-    return state.usersPage.users
++    return state.usersPage.currentPage
+ }
+ export const getIsFetching = (state) => {
+-    return state.usersPage.users
++    return state.usersPage.isFetching
+ }
+ export const getFollowingInProgress = (state) => {
+-    return state.usersPage.users
++    return state.usersPage.followingInProgress
+ }
+\ No newline at end of file
