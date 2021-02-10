@@ -42,25 +42,21 @@ export const setUsersDataApi = () => (dispatch) => {
             }
         })
 }
-export const login = (email, password, rememberMe) => (dispatch) => {
-    authAPI.login(email, password, rememberMe)
-        .then(response => {
-            if (response.data.resultCode === 0) {
-                dispatch(setUsersDataApi())
-                dispatch(setAuthUserId(response.data.data.userId))
-            } else {
-                dispatch(stopSubmit('login', {_error: 'Common error'}))
-            }
-        })
+export const login = (email, password, rememberMe) => async (dispatch) => {
+    const response = await authAPI.login(email, password, rememberMe)
+    if (response.data.resultCode === 0) {
+        dispatch(setUsersDataApi())
+        dispatch(setAuthUserId(response.data.data.userId))
+    } else {
+        dispatch(stopSubmit('login', {_error: 'Common error'}))
+    }
 }
 
-export const logout = () => (dispatch) => {
-    authAPI.logout()
-        .then(response => {
-            if (response.data.resultCode === 0) {
-                dispatch(setUsersData(null, null, null, false))
-            }
-        })
+export const logout = () => async (dispatch) => {
+    const response = await authAPI.logout()
+    if (response.data.resultCode === 0) {
+        dispatch(setUsersData(null, null, null, false))
+    }
 }
 
 export default authReducer;

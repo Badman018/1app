@@ -11,6 +11,7 @@ import {withRouter} from "react-router";
 import {connect} from "react-redux";
 import {compose} from "redux";
 import {initApp} from "./redux/app-reducer";
+import Preloader from "./components/common/Preloader/Preloader";
 
 class App extends React.Component {
     componentDidMount() {
@@ -18,6 +19,9 @@ class App extends React.Component {
     }
 
     render() {
+        if(!this.props.init) {
+            return <Preloader/>
+        }
         return (
             <div className="app-wrapper">
                 <HeaderContainer/>

@@ -34,8 +34,8 @@ class UsersContainer extends React.Component {
             {this.props.isFetching ?
                 <div className={style.preloaderDiv}>
                     <Preloader/>
-                </div> : null}
-            <Users {...this.props} onPageChanged={this.onPageChanged}/>
+                </div> : <Users {...this.props} onPageChanged={this.onPageChanged}/>
+            }
         </>
     }
 }
