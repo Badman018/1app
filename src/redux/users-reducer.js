@@ -75,7 +75,6 @@ export const setFollowingInProgress = (isFetching, userId) => ({type: FOLLOWING_
 
 export const getUsersCreator = (currentPage, pageSize) => async (dispatch) => {
     dispatch(setStatusIsFetching(true))
-    debugger
     let data = await usersAPI.getUsersRequest(currentPage, pageSize)
     dispatch(setUsers(data.items))
     dispatch(setTotalUsersCount(data.totalCount))
