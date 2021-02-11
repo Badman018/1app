@@ -1,4 +1,4 @@
-const SEND_MESSAGE = 'SEND_MESSAGE'
+const SEND_MESSAGE = 'messenger/dialogs/SEND_MESSAGE'
 
 export const sendMessageCreator = (body) => ({
     type: SEND_MESSAGE, body

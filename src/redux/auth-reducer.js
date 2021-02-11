@@ -1,8 +1,8 @@
 import {authAPI, usersAPI} from "../api/api";
 import {stopSubmit} from "redux-form";
 
-const SET_USERS_DATA = 'SET_USERS_DATA'
-const SET_AUTH_USER_ID = 'SET_AUTH_USER_ID'
+const SET_USERS_DATA = 'messenger/auth/SET_USERS_DATA'
+const SET_AUTH_USER_ID = 'messenger/auth/SET_AUTH_USER_ID'
 
 let initialState = {
     id: null,

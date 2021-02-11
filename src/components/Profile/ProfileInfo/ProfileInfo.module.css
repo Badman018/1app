@@ -7,8 +7,10 @@
     padding: 10px;
 }
 
-img {
+.userPhoto {
     width: 100%;
+    padding: 10px;
+
 }
 
 .descriptionContent img {

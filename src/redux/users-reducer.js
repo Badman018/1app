@@ -1,13 +1,13 @@
 import {usersAPI} from "../api/api";
 import {updateObjectInArray} from "../utils/objects-helper";
 
-const FOLLOW = 'FOLLOW'
-const UNFOLLOW = 'UNFOLLOW'
-const SET_USERS = 'SET_USERS'
-const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
-const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT'
-const STATUS_IS_FETCHING = 'STATUS_IS_FETCHING'
-const FOLLOWING_IN_PROGRESS = 'FOLLOWING_IN_PROGRESS'
+const FOLLOW = 'messenger/users/FOLLOW'
+const UNFOLLOW = 'messenger/users/UNFOLLOW'
+const SET_USERS = 'messenger/users/SET_USERS'
+const SET_CURRENT_PAGE = 'messenger/users/SET_CURRENT_PAGE'
+const SET_TOTAL_USERS_COUNT = 'messenger/users/SET_TOTAL_USERS_COUNT'
+const STATUS_IS_FETCHING = 'messenger/users/STATUS_IS_FETCHING'
+const FOLLOWING_IN_PROGRESS = 'messenger/users/FOLLOWING_IN_PROGRESS'
 
 let initialState = {
     users: [],

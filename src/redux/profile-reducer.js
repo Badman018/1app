@@ -1,8 +1,9 @@
 import {profileAPI, usersAPI} from "../api/api";
 
-const ADD_POST = 'ADD-POST'
-const SET_USERS_PROFILE = 'SET_USERS_PROFILE'
-const SET_STATUS = 'SET_STATUS'
+const ADD_POST = 'messenger/profile/ADD-POST'
+const SET_USERS_PROFILE = 'messenger/profile/SET_USERS_PROFILE'
+const SET_STATUS = 'messenger/profile/SET_STATUS'
+const SET_PROFILE_PHOTOS = 'messenger/profile/SET_PROFILE_PHOTOS'
 
 let initialState = {
     posts: [
@@ -38,6 +39,11 @@ const profileReducer = (state = initialState, action) => {
                 ...state, status: action.status
             }
         }
+        case SET_PROFILE_PHOTOS: {
+            return {
+                ...state, profile: {...state.profile, photos: action.photos}
+            }
+        }
         default:
             return state
     }
@@ -46,6 +52,7 @@ const profileReducer = (state = initialState, action) => {
 export const addPostActionCreator = (newPostText) => ({type: ADD_POST, newPostText})
 export const setUsersProfile = (profile) => ({type: SET_USERS_PROFILE, profile})
 export const setStatus = (status) => ({type: SET_STATUS, status})
+export const setProfilePhotos = (photos) => ({type: SET_PROFILE_PHOTOS, photos})
 export const getUserProfileInfoApi = (userId) => (dispatch) => {
     usersAPI.getUserProfileInfo(userId)
         .then(response => {
@@ -59,14 +66,20 @@ export const getStatus = (userId) => (dispatch) => {
             dispatch(setStatus(response.data))
         })
 }
-
 export const updateStatus = (status) => (dispatch) => {
     profileAPI.updateStatus(status)
         .then(response => {
-            if(response.data.resultCode === 1) {
+            if (response.data.resultCode === 0) {
                 dispatch(setStatus(status))
             }
         })
 }
+export const savePhoto = (file) => async (dispatch) => {
+    let response = await profileAPI.setProfilePhotos(file)
+    if (response.data.resultCode === 0) {
+        dispatch(setProfilePhotos(response.data.data.photos))
+    }
+}
+
 
 export default profileReducer;

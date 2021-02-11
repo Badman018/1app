@@ -1,6 +1,6 @@
 import {setUsersDataApi} from "./auth-reducer";
 
-const INIT_APP = 'INIT_APP'
+const INIT_APP = 'messenger/app/INIT_APP'
 
 let initialState = {
     init: false

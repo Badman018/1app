@@ -2,22 +2,25 @@ import React from 'react';
 import s from './ProfileInfo.module.css';
 import Preloader from "../../common/Preloader/Preloader";
 import ProfileStatus from './ProfileStatus'
+import userDefaultPhoto from '../../../assets/images/User.png'
 
-const ProfileInfo = (props) => {
-    if(!props.profile) {
+const ProfileInfo = ({isOwner, profile, updateStatus, status, savePhoto}) => {
+    if(!profile) {
         return (
             <Preloader/>
         )
     }
+    const onChangeProfilePhoto = (e) => {
+        if(e.target.files.length) {
+            savePhoto(e.target.files[0])
+        }
+    }
     return (
         <div className={s.content}>
-            {/*<div>
-                <img src='https://static01.nyt.com/images/2019/11/05/science/28TB-SUNSET1/merlin_163473282_fe17fc6b-78b6-4cdd-b301-6f63e6ebdd7a-superJumbo.jpg'
-                     height='500px' alt='' />
-            </div>*/}
             <div className={s.descriptionContent}>
-                <img src={props.profile.photos.small} alt='' />
-                <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
+                <img src={profile.photos.large || userDefaultPhoto} alt='' className={s.userPhoto} />
+                { !isOwner && <input type='file' onChange={onChangeProfilePhoto} />}
+                <ProfileStatus status={status} updateStatus={updateStatus}/>
             </div>
         </div>
     )
